@@ -1,0 +1,49 @@
+body {
+  background: #e8ece4;
+}
+.guide-sheet {
+  max-width: 1120px;
+  margin: 24px auto;
+  padding-inline: 20px;
+}
+.guide-sheet .guide-diagram {
+  grid-template-columns: 46% 54%;
+}
+.guide-sheet .guide-courses {
+  padding-top: 75px;
+  padding-bottom: 24px;
+  gap: 20px;
+}
+.guide-sheet .course-note .text-button {
+  display: none;
+}
+.guide-sheet .course-note div > p:not(.eyebrow) {
+  font-size: 14px;
+}
+.sheet-source {
+  font-size: 10px;
+  color: #5a6558;
+  margin-top: 12px;
+}
+@media (max-width: 560px) {
+  .guide-sheet {
+    margin-block: 16px;
+    padding-inline: 12px;
+  }
+  .guide-sheet .guide-courses {
+    padding-block: 22px 0;
+    gap: 0;
+  }
+  .guide-sheet .course-note div > p:not(.eyebrow) {
+    font-size: 13px;
+  }
+}
+@media print {
+  .guide-sheet {
+    margin: 0;
+    padding: 0;
+  }
+  .sheet-source {
+    display: none;
+  }
+}

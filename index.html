@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en" data-type="place">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A little ritual for the slow part of the day. Learn the three courses of British afternoon tea, then build a stand of your own."
+    />
+    <meta name="page-type" content="place" />
+    <meta name="site-kind" content="other" />
+    <meta name="page-kind" content="place" />
+    <title>Half Past Four</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;600;650;700;800;900&family=Playfair+Display+SC:ital@1&display=swap"
+    />
+    <link rel="preload" as="image" href="assets/cover/floral-plate.webp" />
+    <link rel="stylesheet" href="css/tea-room.css" />
+    <link rel="stylesheet" href="css/order.css" />
+    <link rel="stylesheet" href="css/cover.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="js/api.js" defer></script>
+    <script src="js/menu-data.js" defer></script>
+    <script src="js/title-letters.js" defer></script>
+    <script src="js/weather.js" defer></script>
+    <script src="js/tea-clock.js" defer></script>
+    <script src="js/motion.js" defer></script>
+    <script src="js/menu.js" defer></script>
+    <script src="js/order.js" defer></script>
+    <script src="js/cover-motion.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <svg class="icon-sprite" aria-hidden="true" focusable="false">
+      <symbol id="icon-teacup" viewBox="0 0 32 32">
+        <path d="M6 13h17v4a8.5 8.5 0 0 1-17 0z" />
+        <path d="M23 15h1.5a3.5 3.5 0 0 1 0 7H22" />
+        <path d="M3 27.5h24" />
+        <path d="M12 9c-1.5-1.6 1.5-2.6 0-4.5M17 9c-1.5-1.6 1.5-2.6 0-4.5" />
+      </symbol>
+      <symbol id="icon-sun" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="4" />
+        <path
+          d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"
+        />
+      </symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24">
+        <path d="M19.5 14.5A7.5 7.5 0 0 1 9.5 4.5a7.5 7.5 0 1 0 10 10z" />
+      </symbol>
+      <symbol id="icon-partly" viewBox="0 0 24 24">
+        <path d="M8.5 3.5v1.5M3.5 8.5H5M4.9 4.9l1 1M12.1 4.9l-1 1" />
+        <path d="M5.6 11.2a3.5 3.5 0 0 1 6.2-3.4" />
+        <path d="M8 19.5h9.5a3.5 3.5 0 0 0 .4-7 5 5 0 0 0-9.6 1.1A3 3 0 0 0 8 19.5z" />
+      </symbol>
+      <symbol id="icon-cloud" viewBox="0 0 24 24">
+        <path d="M7 18.5h10.5a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.2A3.5 3.5 0 0 0 7 18.5z" />
+      </symbol>
+      <symbol id="icon-rain" viewBox="0 0 24 24">
+        <path d="M7 14.5h10.5a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.2A3.5 3.5 0 0 0 7 14.5z" />
+        <path d="M8.5 17.5l-1 2.5M12.5 17.5l-1 2.5M16.5 17.5l-1 2.5" />
+      </symbol>
+      <symbol id="icon-snow" viewBox="0 0 24 24">
+        <path d="M7 14.5h10.5a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.2A3.5 3.5 0 0 0 7 14.5z" />
+        <path d="M8 18.5h.01M12 20h.01M16 18.5h.01M10 21.5h.01M14 21.5h.01" />
+      </symbol>
+      <symbol id="icon-fog" viewBox="0 0 24 24">
+        <path d="M4 9h16M6 13h13M4 17h14M8 21h9" />
+      </symbol>
+      <symbol id="icon-storm" viewBox="0 0 24 24">
+        <path d="M7 14.5h10.5a4 4 0 0 0 .5-8 6 6 0 0 0-11.6 1.2A3.5 3.5 0 0 0 7 14.5z" />
+        <path d="M12.5 15.5l-2 3.5h3l-2 3.5" />
+      </symbol>
+    </svg>
+    <header class="site-header">
+      <a class="brand" href="#top"
+        ><svg class="brand-mark" aria-hidden="true"><use href="#icon-teacup" /></svg
+        ><span>half past four<span class="brand-sub">A LITTLE AFTERNOON RITUAL</span></span></a
+      >
+      <p class="header-weather" id="header-weather" hidden>
+        <svg class="header-weather-icon" aria-hidden="true"><use href="#icon-cloud" /></svg
+        ><span class="header-weather-text"></span>
+      </p>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="#tea-guide">How to tea</a></li>
+          <li><a href="#menu">The menu</a></li>
+          <li>
+            <a class="nav-stand" href="#your-stand">Your stand <span id="stand-count">0</span></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="collage-hero lace-hero" id="top" aria-labelledby="hero-title">
+        <div class="collage-paper collage-blue" aria-hidden="true"></div>
+        <div class="collage-paper collage-green" aria-hidden="true"></div>
+        <div class="collage-paper collage-rose" aria-hidden="true"></div>
+        <div class="collage-paper collage-blue-corner" aria-hidden="true"></div>
+        <div class="collage-cutout baker-scrap" aria-hidden="true">
+          <img src="assets/cover/storybook-baker.webp" alt="" width="640" height="960" />
+        </div>
+        <div class="collage-cutout plate-scrap" aria-hidden="true">
+          <img src="assets/art/empty-plate.webp" alt="" width="480" height="320" />
+        </div>
+        <div class="collage-cutout china-scrap" aria-hidden="true">
+          <img src="assets/art/empty-plate.webp" alt="" width="480" height="320" />
+        </div>
+        <div class="lace-arrangement">
+          <div class="lace-setting-art">
+            <img
+              class="lace-underlay"
+              src="assets/cover/ivory-lace.webp"
+              alt=""
+              width="1536"
+              height="1024"
+            />
+            <div class="ceramic-plate">
+              <img
+                class="central-plate-art"
+                src="assets/cover/floral-plate.webp"
+                alt=""
+                width="1536"
+                height="1024"
+              />
+              <div class="plate-copy">
+                <h1 class="hero-title" id="hero-title" aria-label="Half Past Four">
+                  <span class="title-letters" data-title-letters aria-hidden="true"
+                    >Half Past Four</span
+                  >
+                </h1>
+                <p class="tagline">A little ritual for the slow part of the day.</p>
+                <a class="btn btn-primary" href="#menu"
+                  >Build my afternoon <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lace-cutlery" aria-hidden="true">
+          <img
+            class="table-knife"
+            src="assets/cover/dessert-knife.webp"
+            alt=""
+            width="480"
+            height="720"
+          />
+          <img class="table-spoon" src="assets/art/teaspoon.webp" alt="" width="320" height="480" />
+        </div>
+        <div class="collage-cutout pour-scrap" aria-hidden="true">
+          <img src="assets/cover/blue-china-pour.webp" alt="" width="1000" height="1500" />
+        </div>
+        <div class="collage-cutout cake-scrap" aria-hidden="true">
+          <img src="assets/art/victoria-sponge.webp" alt="" width="480" height="480" />
+        </div>
+        <aside class="collage-note">
+          <p>
+            18 little bites. Four lovely teas.<br /><strong>Always room for another cup.</strong>
+          </p>
+          <button class="motion-toggle" id="toggle-title-motion" type="button" aria-pressed="false">
+            Pause playful letters
+          </button>
+        </aside>
+      </section>
+      <section class="table-notes wrap" aria-label="A note from the tea room">
+        <article class="note-card weather-card" id="weather-card" aria-labelledby="weather-heading">
+          <h2 class="card-label" id="weather-heading">The sky over your table</h2>
+
+          <div class="weather-body" id="weather-body" aria-live="polite">
+            <p class="weather-message">
+              Tell us where you're sitting and we'll pour every drink to suit the weather.
+            </p>
+          </div>
+
+          <div class="weather-actions" id="weather-actions">
+            <button class="btn btn-primary" type="button" id="locate-button">
+              Use my location
+            </button>
+            <button
+              class="btn btn-link"
+              type="button"
+              id="city-toggle"
+              aria-expanded="false"
+              aria-controls="city-form"
+            >
+              Type a city instead
+            </button>
+          </div>
+
+          <form class="city-form" id="city-form" novalidate hidden>
+            <label class="city-label" for="city-input">Which city are you in?</label>
+            <div class="city-row">
+              <input
+                class="city-input"
+                id="city-input"
+                name="city"
+                type="text"
+                placeholder="London"
+                autocomplete="address-level2"
+                aria-describedby="city-error"
+              />
+              <button class="btn btn-primary" type="submit">Look outside</button>
+            </div>
+            <p class="form-error" id="city-error"></p>
+          </form>
+        </article>
+        <article class="clock-card" aria-labelledby="clock-heading">
+          <p class="eyebrow">THERE'S ALWAYS TIME FOR TEA</p>
+          <h2 class="card-label" id="clock-heading">A pause in your afternoon.</h2>
+          <p class="clock-now">Your local time <time id="clock-time">--:--</time></p>
+          <p class="clock-message" id="clock-message">Checking the kitchen clock…</p>
+        </article>
+      </section>
+      <section class="tea-guide" id="tea-guide" aria-labelledby="guide-heading">
+        <div class="wrap">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">A SMALL GUIDE TO A LOVELY TRADITION</p>
+              <h2 id="guide-heading">Three tiers. One lovely afternoon.</h2>
+            </div>
+            <p>
+              New to afternoon tea? Start at the bottom and work your way up. Keep your favourite
+              tea beside you.
+            </p>
+          </div>
+          <div class="guide-paper" id="guide-paper">
+            <div class="guide-heading">
+              <span>HALF PAST FOUR · THE TEA ROOM NOTES</span>
+              <p>Your first afternoon tea</p>
+              <span class="guide-number">No. 01</span>
+            </div>
+            <div class="guide-diagram">
+              <div class="guide-stand" aria-hidden="true">
+                <img
+                  class="stand-base"
+                  src="assets/art/three-tier-stand.webp"
+                  alt=""
+                  width="683"
+                  height="1024"
+                  loading="lazy"
+                  srcset="
+                    assets/art/three-tier-stand-200.webp 200w,
+                    assets/art/three-tier-stand-400.webp 400w,
+                    assets/art/three-tier-stand.webp     683w
+                  "
+                  sizes="(max-width: 560px) 230px, (max-width: 800px) 280px, 404px"
+                />
+                <img
+                  class="tier-food guide-cake"
+                  src="assets/art/victoria-sponge.webp"
+                  alt=""
+                  width="480"
+                  height="480"
+                  loading="lazy"
+                  srcset="
+                    assets/art/victoria-sponge-200.webp 200w,
+                    assets/art/victoria-sponge-320.webp 320w,
+                    assets/art/victoria-sponge.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, 200px"
+                />
+                <img
+                  class="tier-food guide-macaron"
+                  src="assets/art/rose-macaron.webp"
+                  alt=""
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/rose-macaron-200.webp 200w,
+                    assets/art/rose-macaron-320.webp 320w,
+                    assets/art/rose-macaron.webp     480w
+                  "
+                  sizes="(max-width: 560px) 58px, 105px"
+                />
+                <img
+                  class="tier-food guide-scone"
+                  src="assets/art/scone.webp"
+                  alt=""
+                  width="480"
+                  height="480"
+                  loading="lazy"
+                  srcset="
+                    assets/art/scone-200.webp 200w,
+                    assets/art/scone-320.webp 320w,
+                    assets/art/scone.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, 200px"
+                />
+                <img
+                  class="tier-food guide-scone-two"
+                  src="assets/art/fruit-scone.webp"
+                  alt=""
+                  width="480"
+                  height="480"
+                  loading="lazy"
+                  srcset="
+                    assets/art/fruit-scone-200.webp 200w,
+                    assets/art/fruit-scone-320.webp 320w,
+                    assets/art/fruit-scone.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, 200px"
+                />
+                <img
+                  class="tier-food guide-sandwich"
+                  src="assets/art/finger-sandwich.webp"
+                  alt=""
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/finger-sandwich-200.webp 200w,
+                    assets/art/finger-sandwich-320.webp 320w,
+                    assets/art/finger-sandwich.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, 200px"
+                />
+                <img
+                  class="tier-food guide-egg"
+                  src="assets/art/egg-cress-sandwich.webp"
+                  alt=""
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/egg-cress-sandwich-200.webp 200w,
+                    assets/art/egg-cress-sandwich-320.webp 320w,
+                    assets/art/egg-cress-sandwich.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, 200px"
+                />
+                <span class="stand-direction">START HERE & WORK UP ↑</span>
+              </div>
+              <div class="guide-courses">
+                <article class="course-note course-third">
+                  <span class="course-number">03</span>
+                  <div>
+                    <p class="eyebrow">TOP TIER · THE SWEET FINISH</p>
+                    <h3>Something sweet.</h3>
+                    <p>
+                      A slice of sponge, a little tart or a macaron. Pick a couple of favourites to
+                      finish.
+                    </p>
+                    <button class="text-button" type="button" data-show-course="sweet">
+                      Explore the little bakes <span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </article>
+                <article class="course-note course-second">
+                  <span class="course-number">02</span>
+                  <div>
+                    <p class="eyebrow">MIDDLE TIER · FRESH FROM THE OVEN</p>
+                    <h3>A scone, of course.</h3>
+                    <p>
+                      Break a scone in two and add cream and jam. For a change, our middle tier also
+                      offers crumpets and Welsh cakes.
+                    </p>
+                    <button class="text-button" type="button" data-show-course="scones">
+                      Make room for a scone <span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </article>
+                <article class="course-note course-first">
+                  <span class="course-number">01</span>
+                  <div>
+                    <p class="eyebrow">BOTTOM TIER · BEGIN WITH SAVOURIES</p>
+                    <h3>A few little sandwiches.</h3>
+                    <p>
+                      Start with delicate finger sandwiches. Try two different fillings before
+                      moving up.
+                    </p>
+                    <button class="text-button" type="button" data-show-course="savoury">
+                      Choose your first course <span aria-hidden="true">↗</span>
+                    </button>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="guide-tea-options" role="group" aria-label="Four teas to try">
+              <figure>
+                <img
+                  src="assets/art/teacup.webp"
+                  alt="A floral cup of amber Earl Grey tea"
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/teacup-200.webp 200w,
+                    assets/art/teacup-320.webp 320w,
+                    assets/art/teacup.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, (max-width: 800px) 160px, 270px"
+                />
+                <figcaption>Earl Grey<span>Citrus · try with lemon cake</span></figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="assets/art/english-breakfast.webp"
+                  alt="A floral cup of dark English Breakfast tea"
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/english-breakfast-200.webp 200w,
+                    assets/art/english-breakfast-320.webp 320w,
+                    assets/art/english-breakfast.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, (max-width: 800px) 160px, 270px"
+                />
+                <figcaption>
+                  English Breakfast<span>Full-bodied · try with a scone</span>
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="assets/art/darjeeling.webp"
+                  alt="A floral cup of golden Darjeeling tea"
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/darjeeling-200.webp 200w,
+                    assets/art/darjeeling-320.webp 320w,
+                    assets/art/darjeeling.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, (max-width: 800px) 160px, 270px"
+                />
+                <figcaption>Darjeeling<span>Light · try with cucumber</span></figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="assets/art/chamomile.webp"
+                  alt="A floral cup of honey-coloured chamomile infusion"
+                  width="480"
+                  height="320"
+                  loading="lazy"
+                  srcset="
+                    assets/art/chamomile-200.webp 200w,
+                    assets/art/chamomile-320.webp 320w,
+                    assets/art/chamomile.webp     480w
+                  "
+                  sizes="(max-width: 560px) 140px, (max-width: 800px) 160px, 270px"
+                />
+                <figcaption>Chamomile<span>Caffeine-free · a gentle finish</span></figcaption>
+              </figure>
+            </div>
+            <div class="guide-tea-note">
+              <span aria-hidden="true">✳</span>
+              <p>
+                <strong>And the tea?</strong> Keep a pot beside you from the first sandwich to the
+                last sweet bite. Our pairings are starting points; your taste gets the last word.
+              </p>
+            </div>
+            <div class="guide-bottom">
+              <span>A LITTLE ETIQUETTE, PLENTY OF ROOM FOR YOU.</span
+              ><button class="text-button" id="print-guide" type="button">
+                Print this little guide <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+          <p class="source-note">
+            Inspired by the classic sandwich, scone and cake service at
+            <a href="https://www.fortnumandmason.com/afternoon-tea">Fortnum & Mason</a>. Tea pairing
+            notes informed by the
+            <a href="https://www.royalcollectionshop.co.uk/inspiration-tea-pairings"
+              >Royal Collection</a
+            >. <a href="guide.html">Open the illustrated guide</a> ·
+            <a href="assets/afternoon-tea-guide.png" download>Save the guide as an image</a>.
+          </p>
+        </div>
+      </section>
+      <section class="menu-section wrap" id="menu" aria-labelledby="menu-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">A TEA STAND WITH YOUR NAME ON IT</p>
+            <h2 id="menu-heading">What takes your fancy?</h2>
+          </div>
+          <p>
+            Five savouries, five warm bakes, eight little sweets and four teas. Choose your own, or
+            let the afternoon decide.
+          </p>
+        </div>
+        <div class="menu-tools">
+          <div class="menu-filters" role="group" aria-label="Browse menu courses">
+            <button type="button" data-course="savoury" aria-pressed="true">01 · Savouries</button
+            ><button type="button" data-course="scones" aria-pressed="false">02 · Warm bakes</button
+            ><button type="button" data-course="sweet" aria-pressed="false">
+              03 · Little bakes</button
+            ><button type="button" data-course="tea" aria-pressed="false">A pot of tea</button>
+          </div>
+          <button class="btn btn-outline" type="button" id="surprise-me">
+            Pick a whole tea for me <span aria-hidden="true">✳</span>
+          </button>
+        </div>
+        <p class="pairing-note" id="pairing-note" aria-live="polite">
+          A good place to begin: two sandwiches, a warm bake, two sweet bites and one tea.
+        </p>
+        <div class="menu-layout">
+          <div>
+            <h3 class="visually-hidden" id="course-heading">First course · Savouries</h3>
+            <div class="menu-grid" id="menu-grid" aria-labelledby="course-heading"></div>
+            <noscript
+              ><p>
+                Please enable JavaScript to browse and build your tea stand. The guide above is
+                ready to read.
+              </p></noscript
+            >
+          </div>
+          <aside class="your-stand" id="your-stand" aria-labelledby="stand-heading">
+            <div class="stand-title">
+              <div>
+                <p class="eyebrow">SAVED AT YOUR TABLE</p>
+                <h3 id="stand-heading">Your little afternoon.</h3>
+              </div>
+              <button class="text-button" id="clear-stand" type="button" disabled>Clear</button>
+            </div>
+            <div class="mini-stand" aria-hidden="true">
+              <img
+                class="mini-stand-base"
+                src="assets/art/three-tier-stand.webp"
+                alt=""
+                width="683"
+                height="1024"
+                loading="lazy"
+                srcset="
+                  assets/art/three-tier-stand-200.webp 200w,
+                  assets/art/three-tier-stand-400.webp 400w,
+                  assets/art/three-tier-stand.webp     683w
+                "
+                sizes="190px"
+              />
+              <div class="mini-tier mini-sweet" data-tray="sweet"></div>
+              <div class="mini-tier mini-scones" data-tray="scones"></div>
+              <div class="mini-tier mini-savoury" data-tray="savoury"></div>
+              <div class="mini-tea" data-tray="tea"></div>
+            </div>
+            <p class="stand-empty" id="stand-empty">
+              A lovely afternoon starts with one little choice.
+            </p>
+            <ul class="stand-list" id="stand-list"></ul>
+            <p class="stand-hint" id="stand-hint" aria-live="polite">Choose a savoury to begin.</p>
+            <p class="stand-total"><span>Your tea</span><strong id="stand-total">£0.00</strong></p>
+            <button class="btn btn-primary save-tea" id="checkout-stand" type="button" disabled>
+              Ready for tea <span aria-hidden="true">↗</span>
+            </button>
+            <button class="text-button save-tea-card" id="save-tea" type="button" disabled>
+              Or save my tea card <span aria-hidden="true">↓</span>
+            </button>
+            <p class="stand-disclaimer">Illustrative prices · no charge.</p>
+          </aside>
+        </div>
+      </section>
+      <section class="checkout-section" id="tea-order" aria-labelledby="order-heading">
+        <div class="wrap checkout-layout">
+          <div class="checkout-intro">
+            <p class="eyebrow">THE NEXT PART IS THE SLOW PART</p>
+            <h2 id="order-heading">We'll put the kettle on.</h2>
+            <p>
+              A name for your table, a moment for the tea. We'll let you know when your little
+              afternoon is ready.
+            </p>
+            <img
+              src="assets/art/teapot.webp"
+              alt="Hand-drawn floral porcelain teapot with a golden handle"
+              width="480"
+              height="320"
+              loading="lazy"
+              srcset="
+                assets/art/teapot-200.webp 200w,
+                assets/art/teapot-320.webp 320w,
+                assets/art/teapot.webp     480w
+              "
+              sizes="(max-width: 560px) 220px, 320px"
+            />
+            <p class="order-note">
+              Prices are illustrative. No payment is taken and no booking is made.
+            </p>
+          </div>
+          <div class="order-card">
+            <p id="order-storage-note" class="form-error" hidden>
+              This browser cannot remember your order. Keep this tab open and download your receipt
+              when ready.
+            </p>
+            <form id="order-form" novalidate>
+              <p class="eyebrow">YOUR TABLE IS ALMOST READY</p>
+              <h3>A name for the tea?</h3>
+              <p id="returning-guest" class="returning-guest" hidden></p>
+              <label for="guest-name">What should we call you?</label
+              ><input
+                id="guest-name"
+                name="name"
+                type="text"
+                maxlength="40"
+                autocomplete="given-name"
+                placeholder="Your first name"
+                aria-describedby="name-error"
+                required
+              />
+              <p id="name-error" class="form-error" aria-live="polite"></p>
+              <div id="order-preview" class="order-preview"></div>
+              <label class="check-option"
+                ><input id="quick-brew" type="checkbox" checked /><span
+                  >Quick brew · ready in 20 seconds<span
+                    >Untick to use the tea's 3–4 minute brewing time.</span
+                  ></span
+                ></label
+              >
+              <button class="btn btn-primary" id="place-order" type="submit" disabled>
+                Place tea order <span aria-hidden="true">↗</span>
+              </button>
+              <p class="form-footnote" id="order-empty-hint">
+                Choose something from the menu to start.
+              </p>
+            </form>
+            <div id="order-progress" hidden>
+              <p class="eyebrow" id="order-stage">A MOMENT FOR THE TEA</p>
+              <h3 id="order-status-heading" tabindex="-1">Your tea is brewing.</h3>
+              <p id="order-status" role="status"></p>
+              <div class="brew-clock" id="brew-clock">
+                <span class="visually-hidden">Time left:</span> <span id="brew-time">0:20</span
+                ><span>good things take a little time</span
+                ><progress
+                  id="brew-progress"
+                  max="100"
+                  value="0"
+                  aria-label="Brewing progress"
+                ></progress>
+              </div>
+              <div class="order-reminders" id="order-reminders">
+                <button class="text-button" id="enable-notification" type="button">
+                  Notify me when it's ready <span aria-hidden="true">↗</span>
+                </button>
+                <p id="notification-help" role="status">
+                  The page will show a ready message either way. Keep this tab open.
+                </p>
+              </div>
+              <article
+                class="tea-receipt"
+                id="tea-receipt"
+                aria-labelledby="receipt-heading"
+                hidden
+              >
+                <p class="eyebrow">HALF PAST FOUR · YOUR TEA ROOM RECEIPT</p>
+                <h4 id="receipt-heading">An afternoon, well spent.</h4>
+                <p id="receipt-guest"></p>
+                <p id="receipt-meta"></p>
+                <ul id="receipt-items"></ul>
+                <p class="receipt-total"><span>Total</span><strong id="receipt-total"></strong></p>
+                <p class="receipt-note">
+                  No charge · no restaurant order submitted.<br />Thank you for spending a little
+                  afternoon with us.
+                </p>
+              </article>
+              <div class="receipt-actions" id="receipt-actions" hidden>
+                <button class="btn btn-primary" id="download-receipt" type="button">
+                  Keep my receipt <span aria-hidden="true">↓</span></button
+                ><button class="text-button" id="another-tea" type="button">
+                  Another little afternoon ↗
+                </button>
+              </div>
+              <button class="text-button" id="cancel-order" type="button">Cancel this order</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer wrap">
+      <a class="footer-brand" href="#top">half past four</a>
+      <p>A little ritual for the slow part of the day.</p>
+      <div class="footer-details">
+        <p>
+          A CSE 2004 student project · Illustrations created with AI.<br />Home-baking recipes:
+          <a href="https://www.themealdb.com/">TheMealDB</a>. Weather &amp; city search:
+          <a href="https://open-meteo.com/">Open-Meteo</a>. Place names:
+          <a href="https://www.bigdatacloud.com/">BigDataCloud</a>.
+        </p>
+        <p>
+          Title interaction inspired by
+          <a href="https://github.com/boknowsworld/boknows-text-image-template">boknows</a>
+          (MIT).<br /><a
+            href="https://www.sainsburys.co.uk/gol-ui/recipes/ploughmans-cheese-and-chutney-sandwiches"
+            >Cheese & chutney reference</a
+          >
+          ·
+          <a
+            href="https://www.fortnumandmason.com/media/fortnums/blogpost/pdf/T5_Food_Menu_Autumn_20241022V001_WEB.pdf"
+            >Classic tea menu reference</a
+          >
+        </p>
+      </div>
+      <details class="api-notes">
+        <summary>Your privacy ↗</summary>
+        <p>
+          Sharing your location and turning on notifications are both optional. Prefer not to? Type
+          your city instead, and we'll show the ready message right here on the page.
+        </p>
+        <p>
+          Your name, stand and order stay in this browser. To look up your weather, only your
+          coordinates or city are shared with Open-Meteo and BigDataCloud.
+        </p>
+      </details>
+    </footer>
+    <dialog class="recipe-dialog" id="recipe-dialog" aria-labelledby="recipe-heading">
+      <button
+        class="dialog-close"
+        id="close-recipe"
+        type="button"
+        aria-label="Close recipe details"
+      >
+        ×
+      </button>
+      <p class="eyebrow">A CLOSER LOOK</p>
+      <h2 id="recipe-heading"></h2>
+      <div id="recipe-body" aria-live="polite"></div>
+    </dialog>
+    <p class="toast" id="toast" role="status" hidden></p>
+  </body>
+</html>

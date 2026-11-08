@@ -1,0 +1,379 @@
+/* Approved lace-and-porcelain cover. All artwork shares one centered setting.
+   Title font: Playfair Display SC Italic (Google Fonts, SIL Open Font License). */
+
+.lace-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 760px;
+  overflow: hidden;
+  background: var(--cream);
+}
+.collage-paper {
+  position: absolute;
+  pointer-events: none;
+}
+.collage-blue {
+  inset: 0;
+  background: #e9ece6 url("../assets/cover/blue-botanical.webp") center / 370px repeat;
+}
+.collage-green {
+  width: 57%;
+  height: 125%;
+  top: -80px;
+  right: -65px;
+  transform: rotate(8deg);
+  background: #bac7b5 url("../assets/cover/sage-floral.webp") center / 310px repeat;
+  clip-path: polygon(
+    6% 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    3% 83%,
+    1% 69%,
+    4% 57%,
+    0 45%,
+    4% 34%,
+    1% 19%
+  );
+}
+.collage-rose {
+  bottom: -102px;
+  left: -90px;
+  width: 74%;
+  height: 300px;
+  transform: rotate(-8deg);
+  border-top: 7px solid var(--cream);
+  background: #f0e4dd url("../assets/cover/rose-medallion.webp") center / 390px repeat;
+}
+.collage-rose::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed var(--gold);
+  opacity: 0.65;
+}
+.collage-blue-corner {
+  left: -95px;
+  bottom: -110px;
+  width: 380px;
+  height: 360px;
+  transform: rotate(18deg);
+  border: 1px solid var(--gold);
+  background: #e1e1d2 url("../assets/cover/sage-striped.webp") center / 310px repeat;
+}
+
+/* Position only this outer wrapper; animate its inner group to retain centering. */
+.lace-arrangement,
+.lace-cutlery {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 900px;
+  aspect-ratio: 3 / 2;
+  transform: translate(-50%, -50%);
+}
+.lace-arrangement {
+  z-index: 6;
+}
+.lace-setting-art {
+  position: absolute;
+  inset: 0;
+}
+.lace-cutlery {
+  z-index: 10;
+  pointer-events: none;
+}
+.lace-underlay,
+.central-plate-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.ceramic-plate {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 86%;
+  aspect-ratio: 3 / 2;
+  transform: translate(-50%, -50%);
+}
+.plate-copy {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  width: 69%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.plate-copy .hero-title {
+  margin: 0;
+  font-family: "Playfair Display SC", Georgia, serif;
+  font-size: 72px;
+  font-style: italic;
+  font-weight: 400;
+  font-synthesis: none;
+  letter-spacing: 0;
+  line-height: 1.05;
+}
+.plate-copy .letter-char {
+  -webkit-text-stroke: 1px currentColor;
+}
+.plate-copy .title-letters,
+.plate-copy .title-word:last-child {
+  justify-content: center;
+}
+.plate-copy .tagline {
+  margin: 10px auto 6px;
+  max-width: 360px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.plate-copy .btn {
+  min-height: 36px;
+  margin-top: 4px;
+  padding: 8px 15px;
+  font-size: 11px;
+  gap: 12px;
+}
+.table-knife,
+.table-spoon {
+  position: absolute;
+  z-index: 9;
+  object-fit: contain;
+}
+.table-knife {
+  width: 34%;
+  height: 76%;
+  top: 35%;
+  left: -4%;
+  transform: rotate(16deg);
+}
+.table-spoon {
+  width: 34%;
+  height: 73%;
+  top: 35%;
+  right: -4%;
+  transform: rotate(160deg);
+}
+
+.collage-cutout {
+  position: absolute;
+  z-index: 7;
+}
+.collage-cutout > img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.baker-scrap {
+  left: 19px;
+  top: 124px;
+  width: 283px;
+  transform: rotate(-7deg);
+}
+.pour-scrap {
+  width: 510px;
+  right: -53px;
+  top: -61px;
+  transform: rotate(5deg);
+  z-index: 8;
+}
+.plate-scrap {
+  width: 415px;
+  left: -128px;
+  bottom: -20px;
+  transform: rotate(14deg);
+  z-index: 5;
+}
+.cake-scrap {
+  width: 218px;
+  left: 81px;
+  bottom: 29px;
+  transform: rotate(-11deg);
+  z-index: 9;
+}
+.china-scrap {
+  width: 520px;
+  right: -242px;
+  top: 312px;
+  transform: rotate(-18deg);
+  z-index: 4;
+}
+.collage-note {
+  position: absolute;
+  z-index: 10;
+  right: 27px;
+  bottom: 22px;
+  padding: 12px 18px;
+  transform: rotate(-3deg);
+  border: 1px solid #cfbfa9;
+  background: #fffcf3;
+  color: var(--ink);
+  font-size: 10px;
+  line-height: 1.6;
+}
+.collage-note strong {
+  color: var(--berry);
+  font-weight: 600;
+}
+.collage-note .motion-toggle {
+  margin: 3px 0 -5px;
+  min-height: 26px;
+  padding: 3px 0;
+  font-size: 8px;
+}
+
+@media (min-width: 561px) {
+  .lace-hero {
+    height: calc(100svh - var(--site-header-height, 88px));
+    min-height: 0;
+    container-type: size;
+  }
+  .lace-arrangement,
+  .lace-cutlery {
+    width: min(62cqw, 110cqh, 1100px);
+  }
+  .lace-arrangement {
+    container-type: inline-size;
+  }
+  .plate-copy .hero-title {
+    font-size: 8cqw;
+  }
+  .plate-copy .tagline {
+    font-size: clamp(10px, 1.45cqw, 14px);
+    max-width: 40cqw;
+    margin-block: 1.1cqw 0.65cqw;
+  }
+  .plate-copy .btn {
+    min-height: clamp(32px, 4cqw, 38px);
+    font-size: clamp(10px, 1.25cqw, 12px);
+    padding: 0.9cqw 1.7cqw;
+  }
+  .pour-scrap {
+    width: min(31cqw, 63cqh, 500px);
+    right: -2cqw;
+    top: -6cqh;
+  }
+  .baker-scrap {
+    width: min(20cqw, 51cqh, 320px);
+    left: 1.3cqw;
+    top: 14cqh;
+  }
+  .plate-scrap {
+    width: min(29cqw, 50cqh, 470px);
+    left: -9cqw;
+  }
+  .china-scrap {
+    width: min(36cqw, 64cqh, 580px);
+    right: -17cqw;
+    top: 43cqh;
+  }
+  .cake-scrap {
+    width: min(15cqw, 29cqh, 250px);
+    left: 5.6cqw;
+    bottom: 3.5cqh;
+  }
+  .collage-note {
+    right: 1.9cqw;
+    bottom: 2.7cqh;
+  }
+  .collage-rose {
+    height: 37cqh;
+    bottom: -12cqh;
+  }
+  .collage-blue-corner {
+    width: 26cqw;
+    height: 44cqh;
+    bottom: -13cqh;
+  }
+}
+
+@media (max-width: 560px) {
+  .collage-blue {
+    background-size: 265px;
+  }
+  .collage-green {
+    width: 65%;
+    right: -35px;
+    top: -20px;
+    background-size: 220px;
+  }
+  .collage-rose {
+    width: 150%;
+    height: 230px;
+    left: -40px;
+    bottom: -42px;
+  }
+  .collage-blue-corner {
+    width: 180px;
+    height: 260px;
+    bottom: -100px;
+    left: -40px;
+  }
+  .lace-arrangement,
+  .lace-cutlery {
+    width: min(440px, calc(100% - 24px));
+  }
+  .plate-copy {
+    width: 74%;
+  }
+  .plate-copy .hero-title {
+    font-size: clamp(28px, 8.5vw, 38px);
+    line-height: 0.96;
+  }
+  .plate-copy .letter-char {
+    -webkit-text-stroke: 0.6px currentColor;
+  }
+  .plate-copy .tagline {
+    font-size: 10px;
+    line-height: 1.3;
+    margin: 5px auto 3px;
+    max-width: 190px;
+  }
+  .plate-copy .btn {
+    min-height: 32px;
+    padding: 7px 10px;
+    margin-top: 2px;
+    font-size: 10px;
+    gap: 9px;
+  }
+  .baker-scrap {
+    width: 150px;
+    left: -9px;
+    top: -15px;
+    z-index: 5;
+  }
+  .pour-scrap {
+    width: 165px;
+    right: -20px;
+    top: 490px;
+    z-index: 5;
+  }
+  .china-scrap {
+    width: 245px;
+    right: -145px;
+    top: 53px;
+  }
+  .plate-scrap {
+    width: 270px;
+    bottom: -15px;
+    left: -110px;
+  }
+  .cake-scrap {
+    width: 132px;
+    left: 8px;
+    bottom: 20px;
+  }
+  .collage-note {
+    right: 12px;
+    top: 24px;
+    bottom: auto;
+    max-width: 170px;
+    padding: 8px 10px;
+    font-size: 8px;
+  }
+}
